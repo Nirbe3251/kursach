@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-6 text-center">
+    <h2><%= t('index.rooms') %></h2>
+
+    <ul class="mt-4 list-unstyled">
+      <%= render @rooms %>
+    </ul>
+
+    <div class="mt-2">
+      <%= render 'rooms/form', room: @room %>
+    </div>
+  </div>
+
+  <div class="col-6 text-center">
+    <h2><%= t('index.online_now') %></h2>
+
+    <ul class="users-list mt-4 list-unstyled text-success" id="users">
+      <%= render @users_online %>
+    </ul>
+  </div>
+</div>

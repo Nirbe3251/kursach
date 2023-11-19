@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  app:
+    build:
+     dockerfile: Dockerfile
+     context: ./
+    command: bin/dev
+    tty: true
+    # entrypoint: npm install
+    working_dir: /app
+    volumes:
+    - ./instatalk:/app
+    ports:
+    - 3000:3000
+    restart: always
+    depends_on:
+    - db
+    - redis
+
+  redis:
+   image: redis
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: test
+      
+    volumes:
+    - db_volume:/var/lib/mysql
+    ports:
+    - 3306:3306
+
+volumes:
+  db_volume:

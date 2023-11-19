@@ -1,0 +1,12 @@
+development:
+  adapter: redis
+  url: redis://redis:6379/1
+
+test:
+  adapter: redis
+  url: redis://redis:6379/1
+
+production:
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") { Rails.application.credentials.dig(:redis, :url) } %>
+  channel_prefix: instatalk_production

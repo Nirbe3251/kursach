@@ -1,0 +1,18 @@
+ru:
+  rooms:
+    create:
+      room_created: Комната была успешно создана.
+    create_room: Создать комнату
+    join: Войти
+    leave: Покинуть
+    room: 'Комната #%{room_id}'
+
+  index:
+    rooms: Комнаты
+    online_now: Сейчас онлайн
+
+  layouts:
+    welcome: Добро пожаловать в Instatalk,
+
+  messages:
+    enter_message: Введите сообщение
