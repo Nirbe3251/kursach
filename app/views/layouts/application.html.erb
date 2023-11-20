@@ -16,7 +16,7 @@
       <div class="col-md-8">
         <div class="card text-center mt-4 mb-4">
           <div class="card-body">
-            <%= t('layouts.welcome')%> <b><%= current_user.email %></b>!
+            <%= t('layouts.welcome')%> <b><%= current_user ? current_user.email : 'Guest' %></b>!
           </div>
         </div>
         <%= yield %>

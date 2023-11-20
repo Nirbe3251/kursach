@@ -1,5 +1,6 @@
 class Room < ApplicationRecord
   has_many :messages, dependent: :destroy
+  belongs_to :user
 
   before_create :generate_token
 
