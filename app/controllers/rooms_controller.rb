@@ -11,9 +11,18 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.create!
+    
+    Rails.logger.info("START CREATE_________________-")
+
+    @room = Room.create!(user: current_user)
 
     redirect_to @room, notice: t('.room_created')
+  end
+
+  def destroy
+    @rm = Room.find_by(token: params[:token])
+    @rm.destroy!
+    redirect_to rooms_path
   end
 
   private
