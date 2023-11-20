@@ -8,7 +8,7 @@ class CreateMessages < ActiveRecord::Migration[7.0]
       t.timestamps
     end
   end
-  def down
+  def def down 
     drop_table :messages
   end
 end

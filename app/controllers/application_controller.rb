@@ -6,14 +6,14 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def current_user
-    @current_user ||= User.where(id: cookies.signed[:user_id]).first
+  # def current_user
+  #   @current_user ||= User.where(id: cookies.signed[:user_id]).first
 
-    if @current_user.nil?
-      @current_user = User.create
-      cookies.signed[:user_id] = current_user.id
-    end
+  #   if @current_user.nil?
+  #     @current_user = User.create
+  #     cookies.signed[:user_id] = current_user.id
+  #   end
 
-    @current_user
-  end
+  #   @current_user
+  # end
 end
