@@ -29,14 +29,11 @@
 
     <div class="mt-2">
       <%= form_for @room do |form| %>
-<<<<<<< HEAD
         <%= form.label 'Name' %>
         <%= form.text_field :name %>
         <%= form.check_box :status, {}, 'true', 'false' %>
         <%= form.label 'Password' %>
         <%= form.text_field :password %>
-=======
->>>>>>> room destroy add
         <div class="actions">
           <%= form.submit t('rooms.create_room'), class: 'btn btn-primary' %>
         </div>
@@ -48,12 +45,8 @@
     <h2><%= t('index.online_now') %></h2>
 
     <ul class="users-list mt-4 list-unstyled text-success" id="users">
-<<<<<<< HEAD
       <%= render @users_online %>
       <%#= content_tag(:li, current_user.email, { id: "user_online_#{current_user.id}" }) %>
-=======
-      <%= content_tag(:li, current_user.email, { id: "user_online_#{current_user.id}" }) %>
->>>>>>> room destroy add
     </ul>
   </div>
 </div>
