@@ -5,11 +5,11 @@ services:
      dockerfile: Dockerfile
      context: ./
     command: bin/dev
+    entrypoint: /app/entrypoints/app-entrypoint.sh
     tty: true
-    # entrypoint: npm install
     working_dir: /app
     volumes:
-    - ./instatalk:/app
+    - ./:/app
     ports:
     - 3000:3000
     restart: always
