@@ -18,6 +18,7 @@ class RoomsController < ApplicationController
     
     Rails.logger.info("START CREATE_________________-")
 
+<<<<<<< HEAD
     Rails.logger.info("CREATE ROOMS WITH PARAMS: #{params}")
     
     @room = Room.new(room_params)
@@ -25,12 +26,21 @@ class RoomsController < ApplicationController
     current_user.rooms << @room
     @room.priv! if params[:room][:status] == 'true'
     @room.password = params[:room][:password] if params[:room][:password].present?
+=======
+    @room = Room.create!(user: current_user)
+>>>>>>> room destroy add
 
     if @room.save
       redirect_to @room, notice: t('.room_created')
     else
       redirect_to root_path
     end
+  end
+
+  def destroy
+    @rm = Room.find_by(token: params[:token])
+    @rm.destroy!
+    redirect_to rooms_path
   end
 
   def destroy

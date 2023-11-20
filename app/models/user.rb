@@ -1,7 +1,11 @@
 class User < ApplicationRecord
   has_many :messages, dependent: :destroy
+<<<<<<< HEAD
   has_many :room_users
   has_many :rooms, through: :room_users, dependent: :destroy
+=======
+  has_many :rooms, dependent: :destroy
+>>>>>>> room destroy add
   before_create :generate_nickname
   scope :online, -> { where(online: true) }
   # Include default devise modules. Others available are:
