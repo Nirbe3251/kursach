@@ -6,7 +6,7 @@ class CreateRooms < ActiveRecord::Migration[7.0]
       t.timestamps
     end
   end
-  def def down 
+  def down 
     drop_table :rooms
   end
 end
