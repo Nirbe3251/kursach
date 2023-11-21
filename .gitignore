@@ -18,6 +18,9 @@ log/*
 !/instatalk/tmp/pids/
 !/tmp/pids/.keep
 
+# Ignore Ruby gems
+/vendor/ruby
+
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
