@@ -9,7 +9,7 @@
       <% @rooms.each do |room| %>
       <li>
         <b>
-          <%= t('rooms.room', room_id: room.id) %>
+          (<%= room.status %>)<%= room.name %>
         </b> 
         — 
         <%= link_to t('rooms.join'), room %>
@@ -21,6 +21,11 @@
 
     <div class="mt-2">
       <%= form_for @room do |form| %>
+        <%= form.label 'Name' %>
+        <%= form.text_field :name %>
+        <%= form.check_box :status, {}, 'true', 'false' %>
+        <%= form.label 'Password' %>
+        <%= form.text_field :password %>
         <div class="actions">
           <%= form.submit t('rooms.create_room'), class: 'btn btn-primary' %>
         </div>
@@ -32,7 +37,7 @@
     <h2><%= t('index.online_now') %></h2>
 
     <ul class="users-list mt-4 list-unstyled text-success" id="users">
-      <%= content_tag(:li, @online_users.email, { id: "user_online_#{current_user.id}" }) %>
+      <%= content_tag(:li, current_user.email, { id: "user_online_#{current_user.id}" }) %>
     </ul>
   </div>
 </div>
