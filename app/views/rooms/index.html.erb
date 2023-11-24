@@ -37,7 +37,8 @@
     <h2><%= t('index.online_now') %></h2>
 
     <ul class="users-list mt-4 list-unstyled text-success" id="users">
-      <%= content_tag(:li, current_user.email, { id: "user_online_#{current_user.id}" }) %>
+      <%= render @users_online %>
+      <%#= content_tag(:li, current_user.email, { id: "user_online_#{current_user.id}" }) %>
     </ul>
   </div>
 </div>
