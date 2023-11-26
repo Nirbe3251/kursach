@@ -1,5 +1,5 @@
 class UsersOnlineChannel < ApplicationCable::Channel
-  after_unsubscribe :handle_offline
+  before_unsubscribe :handle_offline
 
   def subscribed
     stream_from 'users_online_channel'
