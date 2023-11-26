@@ -94,6 +94,10 @@ GEM
       activesupport (>= 5.0)
     i18n (1.9.1)
       concurrent-ruby (~> 1.0)
+    importmap-rails (1.2.3)
+      actionpack (>= 6.0.0)
+      activesupport (>= 6.0.0)
+      railties (>= 6.0.0)
     io-wait (0.2.1)
     jsbundling-rails (1.0.0)
       railties (>= 6.0.0)
@@ -126,7 +130,6 @@ GEM
     nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pg (1.3.0)
     puma (5.6.1)
       nio4r (~> 2.0)
     racc (1.6.0)
@@ -167,6 +170,13 @@ GEM
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
+    slim (5.2.0)
+      temple (~> 0.10.0)
+      tilt (>= 2.1.0)
+    slim-rails (3.6.3)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 6.0, != 5.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -177,7 +187,9 @@ GEM
     stimulus-rails (1.0.2)
       railties (>= 6.0.0)
     strscan (3.0.1)
+    temple (0.10.3)
     thor (1.2.1)
+    tilt (2.3.0)
     timeout (0.2.0)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
@@ -204,13 +216,14 @@ DEPENDENCIES
   devise
   faker!
   foreman
+  importmap-rails
   jsbundling-rails
   mysql2
-  pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.1)
   rails-i18n
   redis (~> 4.0)
+  slim-rails
   sprockets-rails
   stimulus-rails
   turbo-rails
