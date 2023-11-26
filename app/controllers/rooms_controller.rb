@@ -39,6 +39,12 @@ class RoomsController < ApplicationController
     redirect_to rooms_path
   end
 
+  def destroy
+    @rm = Room.find_by(token: params[:token])
+    @rm.destroy!
+    redirect_to rooms_path
+  end
+
   private
 
   def room_params
