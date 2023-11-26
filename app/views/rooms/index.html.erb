@@ -9,19 +9,12 @@
       <% @rooms.each do |room| %>
       <li>
         <b>
-<<<<<<< HEAD
+
           (<%= room.status %>)<%= room.name %>
         </b> 
         — 
         <%= link_to t('rooms.join'), room %>
         <% if room.user_id == current_user.id %>
-=======
-          <%= t('rooms.room', room_id: room.id) %>
-        </b> 
-        — 
-        <%= link_to t('rooms.join'), room %>
-        <% if room.user_id = current_user.id %>
->>>>>>> room destroy add
           <%= button_to 'Delete', room_path(room.token), method: :delete, data: {confirm: 'Are you certain you want to delete this?'} %></li>
         <% end %>
       <% end %>
