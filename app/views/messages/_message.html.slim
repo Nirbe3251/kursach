@@ -1,0 +1,10 @@
+.row.message.mt-1
+  .col-2.fw-bold.text-info.text-center
+    == message.user.nickname
+
+  .col-9
+    .text-break = message.body
+
+  .col-1
+    .text-dark.bg-light.rounded
+      == message.created_at.strftime("%H:%M")
