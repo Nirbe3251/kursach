@@ -14,12 +14,7 @@ class RoomsController < ApplicationController
     @room = Room.new
   end
 
-  def create
-    
-    Rails.logger.info("START CREATE_________________-")
-
-    Rails.logger.info("CREATE ROOMS WITH PARAMS: #{params}")
-    
+  def create  
     @room = Room.new(room_params)
     @room.user_id = current_user.id
     current_user.rooms << @room
@@ -39,16 +34,10 @@ class RoomsController < ApplicationController
     redirect_to rooms_path
   end
 
-  def destroy
-    @rm = Room.find_by(token: params[:token])
-    @rm.destroy!
-    redirect_to rooms_path
-  end
-
   private
 
   def room_params
-    params.require(:room).permit(:name)
+    params.require(:room).permit(:name, :user_id)
   end
 
   def set_room

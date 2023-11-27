@@ -1,0 +1,10 @@
+h1 == t('rooms.room', room_id: @room.id)
+== link_to t('rooms.leave'), root_path
+
+p#notice == notice
+
+.messages
+  .messages-inner id="messages" data-room-id="<%= @room.id %>"
+    == render @room.messages
+
+== render 'messages/form'

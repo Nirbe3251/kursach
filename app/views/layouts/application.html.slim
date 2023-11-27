@@ -1,0 +1,21 @@
+doctype html
+html lang="ru"
+  head
+    title Instatalk
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    == csrf_meta_tags
+    == csp_meta_tag
+
+    == stylesheet_link_tag "application", "data-turbo-track": "reload"
+    == javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+
+  body
+    div.container
+      div.row.justify-content-md-center
+        div.col-md-8
+          div.card.text-center.mt-4.mb-4
+            div.card-body
+              == t('layouts.welcome')
+              b 
+                | #{current_user ? current_user.email : 'Guest'}!
+        == yield

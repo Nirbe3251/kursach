@@ -1,0 +1,30 @@
+p#notice == notice
+.row
+  .col-12.text-center
+    h2 == t('index.rooms')
+    table.table
+      thead
+        th #
+        th Name
+        th Status
+        th Peoples
+      tbody
+        - @rooms.each do |room|
+          tr
+            td = room.id
+            td 
+              | #{room.name} -- #{link_to 'Войти', room_path(room.token)}
+              - if room.user_id == current_user.id
+                == button_to 'Delete', room_path(room.token), method: :delete, data: {confirm: 'Are you certain you want to delete this?'}
+            td 
+              b = room.status
+            td = room.users.count
+    .mt-2
+      == form_for @room do |form|
+        == form.label 'Name'
+        == form.text_field :name
+        == form.check_box :status, {}, 'true', 'false'
+        == form.label 'Password'
+        == form.text_field :password
+        .actions.mt-2
+          == form.submit t('rooms.create_room'), class: 'btn btn-primary'

@@ -1,0 +1,6 @@
+.mt-2
+  == form_tag do |f|
+    .form-group
+      .input-group
+        == text_field_tag :message_body, '', class: 'form-control',
+          placeholder: t('messages.enter_message')
