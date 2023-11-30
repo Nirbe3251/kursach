@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'rooms#index'
 
   resources :rooms, only: %i[index show create destroy], param: :token
+  get 'users/:id', to: 'users#index'
 
   mount ActionCable.server => '/cable'
 end
