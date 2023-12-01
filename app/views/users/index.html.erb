@@ -1,0 +1,15 @@
+<div>
+    User <%= @user.nickname %>
+</div>
+<div>
+    Email: <%= @user.email %>
+</div>
+<div>
+    Online: <%= @user.online %>
+</div>
+<%= current_user.id %>
+<% if current_user.id == @user.id %>
+    <%= link_to 'Edit account', edit_user_registration_path %>
+<% else %>
+    Пошел вон
+<% end %>
