@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: :show
+  before_action :set_room, only: %i[show check_password]
 
   def index
     @rooms = Room.all
@@ -14,17 +14,14 @@ class RoomsController < ApplicationController
     @room = Room.new
   end
 
-  def create
-    
-    Rails.logger.info("START CREATE_________________-")
-
-    Rails.logger.info("CREATE ROOMS WITH PARAMS: #{params}")
-    
+  def create  
     @room = Room.new(room_params)
     @room.user_id = current_user.id
-    current_user.rooms << @room
-    @room.priv! if params[:room][:status] == 'true'
-    @room.password = params[:room][:password] if params[:room][:password].present?
+    current_user.rooms << @room    
+    if params[:room][:password].present?
+      @room.password = params[:room][:password]
+      @room.priv!
+    end
 
     if @room.save
       redirect_to @room, notice: t('.room_created')
@@ -37,6 +34,23 @@ class RoomsController < ApplicationController
     @rm = Room.find_by(token: params[:token])
     @rm.destroy!
     redirect_to rooms_path
+  end
+
+  def check_password
+    response.header["Content-Type"] = 'application/json'
+    respond_to do |format|
+      format.json { 
+        if @room.password == params[:password]
+          logger.info("Password true")
+          # logger.info(render json: {password: false})
+          render plain: true
+        else
+          logger.info("Password false")
+          # logger.info(render json: {password: false})
+          render plain: false
+        end 
+      }
+    end
   end
 
   def destroy

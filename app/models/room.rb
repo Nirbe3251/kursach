@@ -12,6 +12,10 @@ class Room < ApplicationRecord
     token
   end
 
+  def user_include?(user)
+    users.ids.include? user.id
+  end
+
   private
 
   def generate_token
