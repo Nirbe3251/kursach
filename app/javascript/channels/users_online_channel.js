@@ -13,13 +13,13 @@ function findOrAppendTag(user) {
   li.id = `user_online_${user['id']}`
 
   li.append(user['nickname'])
-  ul.append(li)
+  try {ul.append(li)} catch {};
 }
 
 function removeTag(user) {
   const li = document.getElementById(`user_online_${user['id']}`)
 
-  li.remove()
+  try { li.remove() } catch {};
 }
 
 consumer.subscriptions.create('UsersOnlineChannel', {
