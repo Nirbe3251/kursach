@@ -5,6 +5,7 @@ class RoomsController < ApplicationController
     @rooms = Room.all
     @room = Room.new
     @users_online = User.online
+    
   end
 
   def show

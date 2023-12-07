@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       get :check_password
     end
   end
-  get 'users/:id', to: 'users#index'
+  get 'user/:id', to: 'users#index', as: 'user'
 
 
   mount ActionCable.server => '/cable'

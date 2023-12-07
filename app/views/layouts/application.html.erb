@@ -21,11 +21,24 @@
       <div class='collapse navbar-collapse' id='navbarSupportedContent'>
         <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
           <li class='nav-item'>
-            <a class='nav-link active' aria-current='page' href='#'>Home</a>
+            <%# <a class='nav-link active' aria-current='page' href=" %>
+            <%#= root_path %>
+            <%# ">Home</a> %>
+            <%= link_to 'Главная', root_path, class: 'nav-link active root-path', aria: { current: 'page' }, remote: true, data: {turbo_method: :get} %>
           </li>
-          <li class='nav-item'>
-            <a class='nav-link active' aria-current='page' href='#'>Home</a>
-          </li>
+          <% if current_user.present? %>
+            <li class='nav-item'>
+              <a class='nav-link active' aria-current='page' href="<%= user_path current_user.id %>">Профиль</a>
+            </li>
+            <li class='nav-item'>
+              <%= link_to 'Выйти', destroy_user_session_path, class: 'nav-link active', data: {turbo_method: :delete, remote: true} %>
+            </li>
+          <% else %>
+            <li class='nav-item'>
+              <%= link_to 'Войти', new_user_session_path, class: 'nav-link active'%>
+              <%# <a class='nav-link active' aria-current='page' href="">Войти</a> %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>
