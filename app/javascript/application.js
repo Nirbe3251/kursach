@@ -82,6 +82,12 @@ $('.check-password').each(function() {
     }
 })
 
-$('.root-path').on('click', function() {
-    window.location.href = '/'
+$('a').each(function(){
+    if(typeof $(this).attr('data-path') !== typeof undefined && $(this).attr('data-path') !== false)
+    {
+        $(this).on('click', function(e){
+            window.location.replace($(this).attr('data-path'));
+            location.reload(true);
+        })
+    }
 })

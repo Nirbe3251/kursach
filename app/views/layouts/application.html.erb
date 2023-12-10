@@ -25,7 +25,7 @@
             <%# <a class='nav-link active' aria-current='page' href=" %>
             <%#= root_path %>
             <%# ">Home</a> %>
-            <%= link_to 'Главная', root_path, class: 'nav-link active root-path', aria: { current: 'page' }, remote: true, data: {turbo_method: :get} %>
+            <%= link_to 'Главная', root_path, class: 'nav-link active root-path', aria: { current: 'page' }, remote: true, data: {turbo_method: :get, path: '/'} %>
           </li>
           <% if current_user.present? %>
             <li class='nav-item'>
