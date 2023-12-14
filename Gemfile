@@ -25,6 +25,8 @@ gem 'jquery-rails'
 
 gem 'redis', '~> 4.0'
 
+gem 'coffee-rails'
+
 gem 'rails-i18n'
 
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'

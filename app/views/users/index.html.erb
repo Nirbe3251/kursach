@@ -16,12 +16,13 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px;">
+            <%# <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;"> %>
+              <%= image_tag @user.avatar, class: 'rounded-circle img-fluid', style: 'width: 150px;', alt: 'avatar' %>
             <h5 class="my-3"><%= @user.nickname %></h5>
             <div class="d-flex justify-content-center mb-2">
               <% if current_user.id == @user.id %>
-                <%= button_to 'Edit account', edit_user_registration_path, class: 'btn btn-primary', remote: true, method: :get %>
+                <%= link_to 'Edit account', edit_user_registration_path, class: 'btn btn-primary', method: :get %>
                 <% else %>
                     Пошел вон
                 <% end %>

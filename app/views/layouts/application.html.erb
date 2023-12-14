@@ -3,10 +3,11 @@
   <head>
     <title>Kursach</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="turbolinks-cache-control" content="no-cache">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true  %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%#= javascript_importmap_tags %>
   </head>
@@ -14,7 +15,7 @@
   <body>
   <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
     <div class='container-fluid'>
-      <a class='navbar-brand' href='/'>Root</a>
+      <a class='navbar-brand' href='/' remote=true>Root</a>
       <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
         <span class='navbar-toggler-icon'></span>
       </button>
@@ -22,17 +23,14 @@
       <% if !devise_controller? || current_page?('/users/edit')  %>
         <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
           <li class='nav-item'>
-            <%# <a class='nav-link active' aria-current='page' href=" %>
-            <%#= root_path %>
-            <%# ">Home</a> %>
-            <%= link_to 'Главная', root_path, class: 'nav-link active root-path', aria: { current: 'page' }, remote: true, data: {turbo_method: :get, path: '/'} %>
+            <a class='nav-link active root-path' aria-current='page' href='/' remote='true'>Главная</a>
           </li>
           <% if current_user.present? %>
             <li class='nav-item'>
               <a class='nav-link active' aria-current='page' href="<%= user_path current_user.id %>">Профиль</a>
             </li>
             <li class='nav-item'>
-              <%= link_to 'Выйти', destroy_user_session_path, class: 'nav-link active', data: {turbo_method: :delete, remote: true} %>
+              <%= link_to 'Выйти', destroy_user_session_path, class: 'nav-link active', data: {method: :delete} %>
             </li>
           <% else %>
             <li class='nav-item'>

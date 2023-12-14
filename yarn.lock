@@ -304,3 +304,8 @@
   "version" "5.0.1"
   dependencies:
     "is-number" "^7.0.0"
+
+"turbolinks@5.2.0":
+  "integrity" "sha512-pMiez3tyBo6uRHFNNZoYMmrES/IaGgMhQQM+VFF36keryjb5ms0XkVpmKHkfW/4Vy96qiGW3K9bz0tF5sK9bBw=="
+  "resolved" "https://registry.npmjs.org/turbolinks/-/turbolinks-5.2.0.tgz"
+  "version" "5.2.0"

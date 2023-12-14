@@ -82,6 +82,13 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.8, < 3)
     builder (3.2.4)
+    coffee-rails (5.0.0)
+      coffee-script (>= 2.2.0)
+      railties (>= 5.2.0)
+    coffee-script (2.4.1)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.12.2)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     cssbundling-rails (1.0.0)
@@ -233,6 +240,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap
+  coffee-rails
   cssbundling-rails
   devise
   faker!

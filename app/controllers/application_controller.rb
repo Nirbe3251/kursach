@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[nickname birthday])
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[nickname birthday])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[nickname birthday avatar])
   end
   # def current_user
   #   @current_user ||= User.where(id: cookies.signed[:user_id]).first
