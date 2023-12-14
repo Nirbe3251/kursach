@@ -24,9 +24,13 @@ function CheckPassword() {
         const check_footer = $('#check-modal-footer').html(check_buttons);
         const password_form = `
         <form>
-            <div class='input-group col-12'>
-                <label for='passwd'>Password:</label>
-                <input type='password' id='passwd' required/>
+            <div class="form-group row">
+                <div class='input-group col-12'>
+                    <label for='passwd' class='col-sm-2 col-form-label'>Password:</label>
+                    <div class="col-sm-10">
+                        <input type='password' id='passwd' class='form-control' required/>
+                    </div>
+                </div>
             </div>
         </form>
         `
@@ -84,15 +88,15 @@ function CheckPassword() {
             }
         })
 
-        $('a').each(function(){
-            if(typeof $(this).attr('data-path') !== typeof undefined && $(this).attr('data-path') !== false)
-            {
-                $(this).on('click', function(e){
-                    window.location.replace($(this).attr('data-path'));
-                    location.reload(true);
-                })
-            }
-        })
+        // $('a').each(function(){
+        //     if(typeof $(this).attr('data-path') !== typeof undefined && $(this).attr('data-path') !== false)
+        //     {
+        //         $(this).on('click', function(e){
+        //             window.location.replace($(this).attr('data-path'));
+        //             location.reload(true);
+        //         })
+        //     }
+        // })
 };
 
 import jQuery from 'jquery'
