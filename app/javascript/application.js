@@ -1,5 +1,5 @@
 // Entry point for the build script in your package.json
-// import "@hotwired/turbo-rails"
+import "@hotwired/turbo-rails"
 import "./controllers"
 import Turbolinks from 'turbolinks'
 import "bootstrap"
@@ -10,7 +10,7 @@ import "./scripts"
 
 Turbolinks.start()
 
-Rails.start()
+// Rails.start()
 
 function CheckPassword() {
     const check_buttons = `
@@ -102,6 +102,6 @@ function CheckPassword() {
 import jQuery from 'jquery'
 window.jQuery = jQuery
 window.$ = jQuery
-$(document).on('turbolinks:load load ready', function() {
+$(document).on('turbo:load load ready ajax:before', function() {
     CheckPassword();
 })
