@@ -2,3 +2,25 @@
 @import 'messages';
 @import 'users';
 @import 'bootstrap-icons/font/bootstrap-icons';
+@font-face {
+    font-family: "bootstrap-icons";
+    src: font-url("bootstrap-icons/font/fonts/bootstrap-icons.woff2") format("woff2"),
+      font-url("bootstrap-icons/font/fonts/bootstrap-icons.woff") format("woff");
+  }
+.btn-check:focus + .btn, .btn:focus{
+  box-shadow: none;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  height:100vh;
+  margin: 0;
+  padding: 0;
+}
+.card-body {
+  overflow: auto;
+}
+.back-link, .back-link:hover {
+  text-decoration: none;
+  color: black;
+}
