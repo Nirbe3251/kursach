@@ -8,20 +8,20 @@
               <div class="mb-md-5 mt-md-4 pb-5">
                 <h2 class="fw-bold mb-2 text-uppercase">Sign up</h2>
                 <div class="form-outline form-white mb-4">
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control form-control-lg' %>
+                  <%= f.email_field :email, "Почта",autofocus: true, autocomplete: "email", class: 'form-control form-control-lg' %>
                   <%= f.label :email, class: 'form-label' %>
                 </div>
                 <div class="form-outline form-white mb-4">
-                  <%= f.text_field :nickname, autofocus: true, class: 'form-control form-control-lg' %>
+                  <%= f.text_field :nickname, "Никнейм",autofocus: true, class: 'form-control form-control-lg' %>
                   <%= f.label :nickname, class: 'form-label' %>
                 </div>
                 <div class="form-outline form-white mb-4">
-                  <%= f.date_field :birthday, autofocus: true, class: 'form-control form-control-lg' %>
+                  <%= f.date_field :birthday, "Дата рождения",autofocus: true, class: 'form-control form-control-lg' %>
                   <%= f.label :birthday, class: 'form-label' %>
                 </div>
 
                 <div class="form-outline form-white mb-4">
-                  <%= f.password_field :password, autocomplete: "new-password", class: 'form-control form-control-lg' %>
+                  <%= f.password_field :password, "Пароль",autocomplete: "new-password", class: 'form-control form-control-lg' %>
                   <%= f.label :password, class: 'form-label' %>
                   <% if @minimum_password_length %>
                   <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -29,18 +29,18 @@
                 </div>
 
                 <div class="field">
-                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control form-control-lg' %>
+                  <%= f.password_field :password_confirmation, "Подтверждение пароля",autocomplete: "new-password", class: 'form-control form-control-lg' %>
                   <%= f.label :password_confirmation, class: 'form-label' %>
                 </div>
 
                 <div class="actions">
-                  <%= f.submit "Sign up", class: 'btn btn-outline-light btn-lg px-5' %>
+                  <%= f.submit "Зарегистрироваться", class: 'btn btn-outline-light btn-lg px-5' %>
                 </div>
               </div>
               <div>
                 <p class="mb-0">
                 <%- if controller_name != 'sessions' %>
-                  <%= link_to "Log in", new_session_path(resource_name), class: 'text-white-50 fw-bold' %><br />
+                  <%= link_to "Войти", new_session_path(resource_name), class: 'text-white-50 fw-bold' %><br />
                 <% end %>
                 </p>
               </div>

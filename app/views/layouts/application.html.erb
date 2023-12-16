@@ -11,16 +11,21 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%#= javascript_importmap_tags %>
   </head>
+  <style>
+    .hide-font {
+      color: rgba(33, 37, 41, 1)
+    }
+  </style>
 
   <body>
   <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
     <div class='container-fluid'>
-      <a class='navbar-brand' href='/' remote=true>Root</a>
+      <font class='hide-font'>aba</font>
+      <% if !devise_controller? || current_page?('/users/edit')  %>
       <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
         <span class='navbar-toggler-icon'></span>
       </button>
       <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-      <% if !devise_controller? || current_page?('/users/edit')  %>
         <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
           <li class='nav-item'>
             <a class='nav-link active root-path' aria-current='page' href='/' remote='true'>Главная</a>

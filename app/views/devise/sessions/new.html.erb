@@ -6,34 +6,34 @@
           <div class="card bg-dark text-white" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
               <div class="mb-md-5 mt-md-4 pb-5">
-                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                <h2 class="fw-bold mb-2 text-uppercase">Войти</h2>
                 <div class="form-outline form-white mb-4">
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control form-control-lg' %>
-                  <%= f.label :email, class: 'form-label' %>
+                  <%= f.email_field :email,autofocus: true, autocomplete: "email", class: 'form-control form-control-lg' %>
+                  <%= f.label :email, "Почта", class: 'form-label' %>
                 </div>
                 <div class="form-outline form-white mb-4">
                   <%= f.password_field :password, autocomplete: "current-password", class: 'form-control form-control-lg' %>
-                  <%= f.label :password, class: 'form-label' %>
+                  <%= f.label :password, "Пароль",class: 'form-label' %>
                 </div>
                 <% if devise_mapping.rememberable? %>
                   <div class="form-outline form-white mb-4">
                     <%= f.check_box :remember_me %>
-                    <%= f.label :remember_me %>
+                    <%= f.label :remember_me, "Запомнить меня" %>
                   </div>
                 <% end %>
                 <p class="small mb-5 pb-lg-2">
                   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-                    <%= link_to "Forgot password?", new_password_path(resource_name), class: 'text-white-50' %>
+                    <%= link_to "Забыли пароль?", new_password_path(resource_name), class: 'text-white-50' %>
                   <% end %>
                 </p>
                 <div class="actions">
-                  <%= f.submit "Login", class: 'btn btn-outline-light btn-lg px-5', method: :get %>
+                  <%= f.submit "Войти", class: 'btn btn-outline-light btn-lg px-5', method: :get %>
                 </div>
               </div>
               <div>
-                <p class="mb-0">Don't have an account?
+                <p class="mb-0">Нет аккаунта?
                   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-                    <%= link_to "Sign up", new_registration_path(resource_name), class: 'text-white-50 fw-bold' %>
+                    <%= link_to "Зарегистрироваться", new_registration_path(resource_name), class: 'text-white-50 fw-bold' %>
                   <% end %>
                 </p>
               </div>

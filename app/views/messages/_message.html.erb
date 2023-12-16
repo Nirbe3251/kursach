@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between">
-  <p class="small mb-1"><%= message.user.nickname %></p>
+  <p class="small mb-1"><%= link_to message.user.nickname, user_path(message.user.id) %></p>
   <p class="small mb-1 text-muted"><%= message.created_at.strftime("%H:%M") %></p>
 </div>
 <div class="d-flex flex-row justify-content-start">
