@@ -10,7 +10,7 @@
             <h5 class="my-3"><%= @user.nickname %></h5>
             <div class="d-flex justify-content-center mb-2">
               <% if current_user.id == @user.id %>
-                <%= link_to 'Edit account', edit_user_registration_path, class: 'btn btn-primary', method: :get %>
+                <%= link_to 'Редактировать', edit_user_registration_path, class: 'btn btn-primary' %>
                 <% else %>
                     Пошел вон
                 <% end %>
