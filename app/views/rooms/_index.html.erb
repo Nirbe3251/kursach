@@ -29,9 +29,9 @@
             <td>
               <% case room.status %>
               <% when 'priv' %>
-                priv <%# <i class='bi bi-lock-fill'></i> %>
+                Закрытая <%# <i class='bi bi-lock-fill'></i> %>
               <% when 'pub' %>
-                pub <%# <i class='bi bi-lock'></i> %>
+                Публичная <%# <i class='bi bi-lock'></i> %>
               <% end %>
             </td>
             <td><%= room.users.count %></td>

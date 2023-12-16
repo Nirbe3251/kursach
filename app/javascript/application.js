@@ -8,9 +8,8 @@ import Rails from '@rails/ujs'
 // import 'bootstrap-icons/font/bootstrap-icons.css'
 import "./channels"
 
-// Turbolinks.start()
-
-// Rails.start()
+Turbolinks.start()
+Rails.start()
 
 function CheckPassword() {
     const check_buttons = `

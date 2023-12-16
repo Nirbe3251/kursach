@@ -30,7 +30,7 @@
               <a class='nav-link active' aria-current='page' href="<%= user_path current_user.id %>">Профиль</a>
             </li>
             <li class='nav-item'>
-              <%= link_to 'Выйти', destroy_user_session_path, class: 'nav-link active', data: {method: :delete} %>
+              <%= link_to 'Выйти', destroy_user_session_path, class: 'nav-link active', method: :delete %>
             </li>
           <% else %>
             <li class='nav-item'>
