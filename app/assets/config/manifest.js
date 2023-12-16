@@ -2,4 +2,4 @@
 //= link_tree ../builds
 //= link application.css
 //= link_tree ../../../node_modules .js
-//= link_tree ../../../vendor/javascript .js
+//= link_directory ../../../vendor

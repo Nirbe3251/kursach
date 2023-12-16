@@ -4,7 +4,9 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-              <%= image_tag @user.avatar, class: 'rounded-circle img-fluid', style: 'width: 150px;', alt: 'avatar' %>
+              <% if @user.avatar.attached? %>
+                <%= image_tag @user.avatar, class: 'rounded-circle img-fluid', style: 'width: 150px;', alt: 'avatar' %>
+              <% end %>
             <h5 class="my-3"><%= @user.nickname %></h5>
             <div class="d-flex justify-content-center mb-2">
               <% if current_user.id == @user.id %>

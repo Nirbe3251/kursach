@@ -5,11 +5,10 @@ import Turbolinks from 'turbolinks'
 import "bootstrap"
 import '@popperjs/core'
 import Rails from '@rails/ujs'
-import 'bootstrap-icons/font/bootstrap-icons.css'
+// import 'bootstrap-icons/font/bootstrap-icons.css'
 import "./channels"
-import "./scripts"
 
-Turbolinks.start()
+// Turbolinks.start()
 
 // Rails.start()
 
