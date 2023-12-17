@@ -8,6 +8,15 @@ class Room < ApplicationRecord
 
   before_create :generate_token
 
+  def self.search(search)
+    res = all
+    if search.present?
+      res = res.where('name LIKE ?', "%#{search[:name]}%") if search[:name].present?
+      res = res.where(status: search[:status]) if search[:status].present?
+    end
+    res
+  end
+
   def to_param
     token
   end

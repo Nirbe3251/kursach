@@ -4,6 +4,17 @@
       <div class="row">
         <div class="col-12 text-center">
           <h2><%= t('index.rooms') %></h2>
+          <div class='col-6'>
+            <%= form_tag root_path, method: :get do %>
+              <%= label_tag 'search[name]','Имя' %>
+              <%= text_field_tag 'search[name]', params[:search] ? params[:search][:name] : '' %>
+              <%= label_tag 'search[status]','Статус' %>
+              <%= select_tag 'search[status]', options_for_select(Room.statuses.keys, params[:search] ? params[:search][:status] : ''), include_blank: true %>
+              <%= button_tag type: "submit", class: 'btn btn-outline-primary' do %>
+                <i class="bi bi-search"></i> Поиск
+              <% end %>
+            <% end %>
+          </div>
           <div class='col-12 text-end'>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <%= t('rooms.create_room') %>

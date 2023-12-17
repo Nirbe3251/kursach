@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   before_action :check_banned, only: %i[show]
  
   def index
-    @rooms = Room.all
+    @rooms = Room.search(params[:search])
     @room = Room.new
     @users_online = User.online
   end
@@ -108,7 +108,7 @@ class RoomsController < ApplicationController
     Rails.logger.info("Status Ban:::#{status}")
     if status
       redirect_to root_path
-    # else
+    else
       # redirect_to room_path(@room.token)
     end
   end
