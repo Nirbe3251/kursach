@@ -1,45 +1,51 @@
-<div class="row">
-  <div class="col-12 text-center">
-    <h2><%= t('index.rooms') %></h2>
-    <div class='col-12 text-end'>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <%= t('rooms.create_room') %>
-      </button>
-    </div>
-    <table class='table'>
-      <thead>
-        <th>#</th>
-        <th>Название</th>
-        <th>Статус</th>
-        <th>Люди</th>
-      </thead>
-      <tbody>
-        <% @rooms.each do |room| %>
-          <% room_token = room.token.to_s %>
-          <tr>
-            <td><%= room.id %></td>
-            <td class='check-td'>
-              <%= link_to room.name, nil, class: "check-password", data: { 
-                bs_target: '#checkPasswordModal', bs_toggle: 'modal', 
-                status: room.status, token: room.token,
-                include: room.user_include?(current_user), data: {path: room_path(room)}
-              } %>
-              </div>
-            </td>
-            <td>
-              <% case room.status %>
-              <% when 'priv' %>
-                Закрытая <%# <i class='bi bi-lock-fill'></i> %>
-              <% when 'pub' %>
-                Публичная <%# <i class='bi bi-lock'></i> %>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2><%= t('index.rooms') %></h2>
+          <div class='col-12 text-end'>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <%= t('rooms.create_room') %>
+            </button>
+          </div>
+          <table class='table'>
+            <thead>
+              <th>#</th>
+              <th>Название</th>
+              <th>Статус</th>
+              <th>Люди</th>
+            </thead>
+            <tbody>
+              <% @rooms.each do |room| %>
+                <% room_token = room.token.to_s %>
+                <tr>
+                  <td><%= room.id %></td>
+                  <td class='check-td'>
+                    <%= link_to room.name, nil, class: "check-password", data: { 
+                      bs_target: '#checkPasswordModal', bs_toggle: 'modal', 
+                      status: room.status, token: room.token,
+                      include: room.user_include?(current_user), data: {path: room_path(room)}
+                    } %>
+                    </div>
+                  </td>
+                  <td>
+                    <% case room.status %>
+                    <% when 'priv' %>
+                      Закрытая <%# <i class='bi bi-lock-fill'></i> %>
+                    <% when 'pub' %>
+                      Публичная <%# <i class='bi bi-lock'></i> %>
+                    <% end %>
+                  </td>
+                  <td><%= room.users.count %></td>
+                </tr>
               <% end %>
-            </td>
-            <td><%= room.users.count %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <%= render 'modals/create_room', rooms: @room %>
+      <%= render 'modals/check_room' %>
+    </div>
   </div>
 </div>
-<%= render 'modals/create_room', rooms: @room %>
-<%= render 'modals/check_room' %>
