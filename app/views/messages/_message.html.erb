@@ -1,5 +1,14 @@
 <div class="d-flex justify-content-between">
-  <p class="small mb-1"><%= link_to message.user.nickname, user_path(message.user.id) %></p>
+  <div>
+  <%= link_to message.user.nickname, user_path(message.user.id), class: 'd-inline-block' %>
+    <div class="btn-group">
+      <button class="btn dropdown-toggle d-inline-block" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <%= link_to 'заблокировать', '#', class: 'dropdown-item text-danger', id: 'user_ban', token: message.room.token, target: true, user_id: message.user.id  %>
+      </ul>
+    </div>
+  </div>
   <p class="small mb-1 text-muted"><%= message.created_at.strftime("%H:%M") %></p>
 </div>
 <div class="d-flex flex-row justify-content-start">

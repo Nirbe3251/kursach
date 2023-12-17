@@ -7,6 +7,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    
+
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true  %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%#= javascript_importmap_tags %>
@@ -17,7 +19,8 @@
     }
   </style>
 
-  <body>
+  <body data-user='<%= current_user.id %>'>
+  
   <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
     <div class='container-fluid'>
       <font class='hide-font'>aba</font>

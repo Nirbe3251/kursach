@@ -54,8 +54,6 @@
   </div>
 <% end %>
 
-<h3>Удаление аккаунта</h3>
-
-<div>Unhappy? <%= button_to "Удалить аккаунт", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+<div><%= button_to "Удалить аккаунт", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 
 <%= link_to "Назад", :back %>

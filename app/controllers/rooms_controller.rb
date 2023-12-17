@@ -1,11 +1,12 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[show check_password]
-
+  before_action :set_room, only: %i[show set_room_user check_password user_ban add_user]
+  before_action :set_room_user, only: %i[show]
+  before_action :check_banned, only: %i[show]
+ 
   def index
     @rooms = Room.all
     @room = Room.new
     @users_online = User.online
-    
   end
 
   def show
@@ -28,6 +29,22 @@ class RoomsController < ApplicationController
       redirect_to @room, notice: t('.room_created')
     else
       redirect_to root_path
+    end
+  end
+
+  def add_user
+    response.header["Content-Type"] = 'application/json'
+    respond_to do |format|
+      format.json {
+        begin
+          user = User.find(params[:user_id])
+          @room.users << user unless @room.users.include? user
+          render plain: true
+        rescue => e
+          Rails.logger.error "#{e.message} #{e.backtrace}"
+          render plain: false
+        end
+      }
     end
   end
 
@@ -60,6 +77,18 @@ class RoomsController < ApplicationController
     redirect_to rooms_path
   end
 
+  def user_ban
+    response.header["Content-Type"] = 'application/json'
+    respond_to do |format|
+      format.json {
+        status = RoomUser.ban(@room.id, params[:user_id], params[:target])
+
+        render plain: true if status == 'banned'
+        render plain: false if status == 'unbanned'
+      }
+    end
+  end
+
   private
 
   def room_params
@@ -68,5 +97,15 @@ class RoomsController < ApplicationController
 
   def set_room
     @room = Room.find_by(token: params[:token])
+  end
+
+  def set_room_user
+    @room_user = RoomUser.where(room_id: @room.id)
+  end
+
+  def check_banned
+    if RoomUser.check_user_ban(current_user.id)
+      redirect_to root_path
+    end
   end
 end
