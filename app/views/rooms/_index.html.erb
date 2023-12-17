@@ -25,7 +25,7 @@
                     <%= link_to room.name, nil, class: "check-password", data: { 
                       bs_target: '#checkPasswordModal', bs_toggle: 'modal', 
                       status: room.status, token: room.token,
-                      include: room.user_include?(current_user), data: {path: room_path(room)}
+                      include: room.user_include?(current_user)
                     } %>
                     </div>
                   </td>

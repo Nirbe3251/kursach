@@ -1,35 +1,16 @@
 import consumer from './consumer'
 
-function findOrAppendTag(user) {
-  let li = document.getElementById(`user_online_${user['id']}`)
+export function UserOnlineSubscriptions() {
+  consumer.subscriptions.create('UsersOnlineChannel', {
+    connected() {
+      console.log('connected to UsersOnlineChannel')
+    },
 
-  if (li) {
-    return
-  }
-
-  const ul = document.getElementById('users')
-
-  li = document.createElement('li')
-  li.id = `user_online_${user['id']}`
-
-  li.append(user['nickname'])
-  try {ul.append(li)} catch {};
+    disconnected() {
+      console.log('disconnected to UsersOnlineChannel')
+    },
+    received(user) {
+      console.log(`User Online::${user['online']}`)
+    }
+  })
 }
-
-function removeTag(user) {
-  const li = document.getElementById(`user_online_${user['id']}`)
-
-  try { li.remove() } catch {};
-}
-
-consumer.subscriptions.create('UsersOnlineChannel', {
-  connected() {
-  },
-
-  disconnected() {
-  },
-
-  received(user) {
-    user['online'] ? findOrAppendTag(user) : removeTag(user)
-  }
-})

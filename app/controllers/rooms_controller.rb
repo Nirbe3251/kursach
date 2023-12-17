@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[show set_room_user check_password user_ban add_user]
+  before_action :set_room, only: %i[show set_room_user check_password user_ban add_user check_banned]
   before_action :set_room_user, only: %i[show]
   before_action :check_banned, only: %i[show]
  
@@ -104,8 +104,12 @@ class RoomsController < ApplicationController
   end
 
   def check_banned
-    if RoomUser.check_user_ban(current_user.id)
+    status = RoomUser.check_user_ban(@room.id, current_user.id)
+    Rails.logger.info("Status Ban:::#{status}")
+    if status
       redirect_to root_path
+    # else
+      # redirect_to room_path(@room.token)
     end
   end
 end

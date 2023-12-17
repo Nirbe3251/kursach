@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
   devise_for :users
   root 'rooms#index'
   
@@ -10,7 +11,4 @@ Rails.application.routes.draw do
     end
   end
   get 'user/:id', to: 'users#index', as: 'user'
-
-
-  mount ActionCable.server => '/cable'
 end

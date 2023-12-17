@@ -8,13 +8,15 @@ class UsersOnlineChannel < ApplicationCable::Channel
     UserStatus.make_online(current_user)
   end
 
-  def unsubscribed; end
+  def unsubscribed
+    # stop_stream_for current_user
+  end
 
   private
 
   def handle_offline
-    HandleOfflineJob.
-      set(wait_until: 5.seconds.from_now).
-      perform_later(current_user)
+      HandleOfflineJob.
+        set(wait_until: 5.seconds.from_now).
+        perform_later(current_user)
   end
 end

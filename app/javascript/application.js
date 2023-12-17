@@ -1,15 +1,19 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
-import "./controllers"
 import Turbolinks from 'turbolinks'
 import "bootstrap"
 import '@popperjs/core'
 import Rails from '@rails/ujs'
 // import 'bootstrap-icons/font/bootstrap-icons.css'
-import "./channels"
+import * as channels from "./channels"
 
 Turbolinks.start()
 Rails.start()
+
+function LoadControllers() {
+    channels.UserOnlineSubscriptions()
+    channels.createRoomChannel()
+};
 
 function Check() {
     const check_buttons = `
@@ -42,11 +46,14 @@ function Check() {
         var url = `/rooms/${token}` 
         var check_url = `/rooms/${token}/check_password`;
         if ($(this).attr('data-include') == 'true') {
+            console.log('ok')
             $(this).removeAttr('data-bs-toggle')
             $(this).removeAttr('data-bs-target')
-            $(this).on('click', function() {window.location.href = url})
+            console.log(url)
+            $(this).on('click', function() {window.location.replace(url)})
         } else {
             $(this).on('click', function() {
+                console.log('not_ok')
                 if (status == 'pub') {
                     modal_body.html(public_text)
                     confirm.on('click', function(){
@@ -135,7 +142,8 @@ function CheckBan() {
 import jQuery from 'jquery'
 window.jQuery = jQuery
 window.$ = jQuery
-$(document).on('turbo:load load ready', function() {
+$(document).on('turbo:load load ready turbo:before-render', function() {
+    LoadControllers();
     Check();
     CheckBan();
 })
