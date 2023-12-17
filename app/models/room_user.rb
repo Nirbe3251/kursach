@@ -3,7 +3,12 @@ class RoomUser < ApplicationRecord
   belongs_to :room
 
   def self.check_user_ban(user_id)
-    where(user_id: user_id).first.banned?
+    user = where(user_id: user_id).first
+    if user.present?
+      user.banned?
+    else
+      false
+    end
   end 
 
   def self.ban(room_id, user_id, target)

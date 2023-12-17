@@ -9,5 +9,5 @@ if [ -s /app/tmp/pids/server.pid ]
         rm /app/tmp/pids/server.pid
 fi
 bundle install
-# rake db:migrate
+rake db:migrate
 exec "$@"
