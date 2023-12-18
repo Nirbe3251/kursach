@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[show set_room_user check_password user_ban add_user check_banned edit]
+  before_action :set_room, only: %i[show set_room_user check_password user_ban add_user check_banned edit leave_room]
   before_action :set_room_user, only: %i[show]
   before_action :check_banned, only: %i[show]
  
@@ -35,6 +35,13 @@ class RoomsController < ApplicationController
     if @room.save
       redirect_to @room, notice: t('.room_created')
     else
+      redirect_to root_path
+    end
+  end
+
+  def leave_room
+    user = RoomUser.find_by(room_id: @room.id, user_id: params[:user_id])
+    if user.delete
       redirect_to root_path
     end
   end
