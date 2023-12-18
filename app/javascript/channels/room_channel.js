@@ -1,6 +1,6 @@
 import consumer from './consumer'
 
-export function createRoomChannel() {
+export function createRoom() {
   document.addEventListener('turbo:load', () => {
     let messages
 

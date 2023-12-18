@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[show set_room_user check_password user_ban add_user check_banned]
+  before_action :set_room, only: %i[show set_room_user check_password user_ban add_user check_banned edit]
   before_action :set_room_user, only: %i[show]
   before_action :check_banned, only: %i[show]
  
@@ -10,6 +10,13 @@ class RoomsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+    if params.present?
+      @room.update(name: params[:name]) if params[:name].present?
+      @room.update(password: params[:password]) if params[:password.present?]
+    end
   end
 
   def new

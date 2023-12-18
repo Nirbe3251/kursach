@@ -4,30 +4,32 @@
       <div class="col-md-12 col-lg-12 col-xl-12">
         <div class='card mt-2' style='height: 90vh'>
           <div class="card-header d-flex p-3"style="border-top: 4px solid black">
-            <div class="d-flex flex-row text-center align-items-center justify-content-center align-items-center ">
+            <div class="d-flex flex-row align-items-center justify-content-center align-items-center col-12">
               <%= link_to(root_path, class: 'back-link') do %>
                 <i class="bi bi-caret-left-fill"></i>
               <% end %>
-              <div class=''>
-                <div class='col-12'>
-                  <div class='justify-content-center align-items-center align-content-center'>
-                    <div class="btn-group">
-                      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class='col-10 text-center'>
+                  <div class='justify-content-start align-items-start align-content-start'>
+                    <%# <div class="btn-group"> %>
+                      <button class="btn">
                         <%= @room.name %>
                       </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <a class="dropdown-item" href="#">Хер</a>
-                        <a class="dropdown-item" href="#">Хер</a>
-                        <a class="dropdown-item" href="#">Хер</a>
-                        <div class="dropdown-divider"></div>
-                        <% if @room.user_id == current_user.id %>
-                          <%= link_to 'Удалить комнату', room_path(@room.token), class: "dropdown-item text-danger", method: :delete, data: {confirm: 'Are you certain you want to delete this?'} %>
-                        <%end %>
-                      </ul>
-                    </div>
                   </div>
                 </div>
-              </div>
+                <div class='col-2 justify-content-end text-end'>
+                  <div class='justify-content-end text-end'>
+                    <%= link_to(room_path(@room.token), class: 'back-link', data: {bs_toggle: 'modal', bs_target: '#usersModal'}, id: 'settings-button11') do %>
+                      <i class="bi bi-people-fill mx-4"></i>
+                    <% end %>
+                  </div>
+                  <% if current_user.id == @room.user_id %>
+                    <div class='justify-content-end text-end'>
+                      <%= link_to(room_path(@room.token), class: 'back-link', data: {bs_toggle: 'modal', bs_target: '#settingsModal'}, id: 'settings-button') do %>
+                        <i class="bi bi-gear-fill mx-4"></i>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
             </div>
           </div>
           <div class='card-body messages' id="messages" data-room-id='<%= @room.id %>' data-mdb-perfect-scrollbar="true" style="position: relative; bottom: 0">
@@ -35,19 +37,19 @@
               <div class="d-flex justify-content-between">
                 <div>
                   <%= link_to message.user.nickname, user_path(message.user.id), class: 'd-inline-block' %>
+                  <% if current_user.id == message.room.user_id %>
                   <div class="btn-group">
-                    <% if current_user.id == message.room.user_id && current_user.nickname != message.user.nickname %>
-                      <button class="btn dropdown-toggle d-inline-block" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <% if check_ban(message.user.id) %>
-                          <%= link_to 'разблокировать', '', class: 'dropdown-item text-danger', id: 'user_ban', token: message.room.token, target: false, user_id: message.user.id  %>
-                        <% else %>
-                          <%= link_to 'заблокировать', '', class: 'dropdown-item text-danger', id: 'user_ban', token: message.room.token, target: true, user_id: message.user.id  %>
-                        <% end %>
-                      </ul>
-                    <% end %>
+                    <button class="btn dropdown-toggle d-inline-block" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <% if check_ban(message.user.id) %>
+                        <%= link_to 'разблокировать', '', class: 'dropdown-item text-danger', id: 'user_ban', token: message.room.token, target: false, user_id: message.user.id  %>
+                      <% else %>
+                        <%= link_to 'заблокировать', '', class: 'dropdown-item text-danger', id: 'user_ban', token: message.room.token, target: true, user_id: message.user.id  %>
+                      <% end %>
+                    </ul>
                   </div>
+                  <% end %>
                 </div>
                 <p class="small mb-1 text-muted"><%= message.created_at.strftime("%H:%M") %></p>
               </div>
@@ -69,3 +71,54 @@
     </div>
   </div>
 </section>
+
+
+<!-- settings room -->
+<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="settingsModalLabel">Редактирование комнаты</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+        <div class="modal-body">
+          <% if current_user.id == @room.user_id %>
+            <%= form_tag(edit_room_path(@room.token), method: :post) do %>
+              <%= label_tag 'params[:name]', 'Имя' %>
+              <%= text_field_tag 'params[:name]', ''  %>
+              <%= label_tag 'params[:password]', 'Пароль' %>
+              <%= text_field_tag 'params[:password]', ''  %>
+              <%= submit_tag %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- settings room -->
+<div class="modal fade" id="usersModal" tabindex="-1" role="dialog" aria-labelledby="usersModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="usersModalLabel">Редактирование комнаты</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+        <div class="modal-body">
+          <% @room.users.each do |u| %>
+            <%= u.nickname %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+        </div>
+    </div>
+  </div>
+</div>
