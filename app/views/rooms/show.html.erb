@@ -42,7 +42,7 @@
                     <button class="btn dropdown-toggle d-inline-block" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <% if check_ban(message.user.id) %>
+                      <% if check_ban(message.room.id,message.user.id) %>
                         <%= link_to 'разблокировать', '', class: 'dropdown-item text-danger', id: 'user_ban', token: message.room.token, target: false, user_id: message.user.id  %>
                       <% else %>
                         <%= link_to 'заблокировать', '', class: 'dropdown-item text-danger', id: 'user_ban', token: message.room.token, target: true, user_id: message.user.id  %>
