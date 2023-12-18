@@ -4,22 +4,26 @@
       <div class="row">
         <div class="col-12 text-center">
           <h2><%= t('index.rooms') %></h2>
-          <div class='col-6'>
-            <%= form_tag root_path, method: :get do %>
-              <%= label_tag 'search[name]','Имя' %>
-              <%= text_field_tag 'search[name]', params[:search] ? params[:search][:name] : '' %>
-              <%= label_tag 'search[status]','Статус' %>
-              <%= select_tag 'search[status]', options_for_select(Room.statuses.keys, params[:search] ? params[:search][:status] : ''), include_blank: true %>
-              <%= button_tag type: "submit", class: 'btn btn-outline-primary' do %>
-                <i class="bi bi-search"></i> Поиск
-              <% end %>
-            <% end %>
-          </div>
-          <div class='col-12 text-end'>
+          <div class='col-12 text-center pt-4'>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <%= t('rooms.create_room') %>
             </button>
           </div>
+          <%= form_tag root_path, method: :get, class: 'row d-flex justify-content-start align-items-start pb-4' do %>
+            <div class='col-auto'>
+              <%= label_tag 'search[name]','Имя' %>
+              <%= text_field_tag 'search[name]', params[:search] ? params[:search][:name] : '', class: 'form-control' %>
+            </div>
+            <div class='col-auto'>
+              <%= label_tag 'search[status]','Статус' %>
+              <%= select_tag 'search[status]', options_for_select(Room.statuses.keys, params[:search] ? params[:search][:status] : ''), include_blank: true, class: 'form-control' %>
+            </div>
+            <div class='col-auto pt-4'>
+              <%= button_tag type: "submit", class: 'btn btn-outline-primary' do %>
+                <i class="bi bi-search"></i>
+              <% end %>
+            </div>
+          <% end %>
           <table class='table'>
             <thead>
               <th>#</th>
@@ -43,9 +47,9 @@
                   <td>
                     <% case room.status %>
                     <% when 'priv' %>
-                      Закрытая <%# <i class='bi bi-lock-fill'></i> %>
+                      Закрытая <i class='bi bi-lock'></i>
                     <% when 'pub' %>
-                      Публичная <%# <i class='bi bi-lock'></i> %>
+                      Публичная <i class='bi bi-unlock'></i>
                     <% end %>
                   </td>
                   <td><%= room.users.count %></td>

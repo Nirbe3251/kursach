@@ -37,19 +37,19 @@
               <div class="d-flex justify-content-between">
                 <div>
                   <%= link_to message.user.nickname, user_path(message.user.id), class: 'd-inline-block' %>
-                  <% if current_user.id == message.room.user_id %>
-                  <div class="btn-group">
-                    <button class="btn dropdown-toggle d-inline-block" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <% if check_ban(message.room.id,message.user.id) %>
-                        <%= link_to 'разблокировать', '', class: 'dropdown-item text-danger', id: 'user_ban', token: message.room.token, target: false, user_id: message.user.id  %>
-                      <% else %>
-                        <%= link_to 'заблокировать', '', class: 'dropdown-item text-danger', id: 'user_ban', token: message.room.token, target: true, user_id: message.user.id  %>
-                      <% end %>
-                    </ul>
-                  </div>
-                  <% end %>
+                  <%# if current_user.id == message.room.user_id %>
+                  <%# <div class="btn-group"> %>
+                    <%# <button class="btn dropdown-toggle d-inline-block" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> %>
+                    <%# </button> %>
+                    <%# <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"> %>
+                      <%# if check_ban(message.room.id,message.user.id) %>
+                        <%#= link_to 'разблокировать', '', class: 'dropdown-item text-danger', id: 'user_ban', token: message.room.token, target: false, user_id: message.user.id  %>
+                      <%# else %>
+                        <%#= link_to 'заблокировать', '', class: 'dropdown-item text-danger', id: 'user_ban', token: message.room.token, target: true, user_id: message.user.id  %>
+                      <%# end %>
+                    <%# </ul> %>
+                  <%# </div> %>
+                  <%# end %>
                 </div>
                 <p class="small mb-1 text-muted"><%= message.created_at.strftime("%H:%M") %></p>
               </div>
@@ -79,23 +79,32 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="settingsModalLabel">Редактирование комнаты</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"></span>
-        </button>
       </div>
         <div class="modal-body">
           <% if current_user.id == @room.user_id %>
-            <%= form_tag(edit_room_path(@room.token), method: :post) do %>
-              <%= label_tag 'params[:name]', 'Имя' %>
-              <%= text_field_tag 'params[:name]', ''  %>
-              <%= label_tag 'params[:password]', 'Пароль' %>
-              <%= text_field_tag 'params[:password]', ''  %>
-              <%= submit_tag %>
+            <%= form_tag(edit_room_path(@room.token), method: :post, class: 'row') do %>
+              <div class="form-group row pb-1">
+                <div class='input-group col-12'>
+                  <%= label_tag 'params[:name]', 'Имя', class: 'col-sm-2 col-form-label' %>
+                  <div class="col-sm-10">
+                    <%= text_field_tag 'params[:name]', '', class: 'form-control'  %>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row pb-1">
+                <div class='input-group col-12'>
+                  <%= label_tag 'params[:password]', 'Пароль', class: 'col-sm-2 col-form-label' %>
+                  <div class="col-sm-10">
+                    <%= text_field_tag 'params[:password]', '', class: 'form-control'  %>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <%= submit_tag 'Редактировать', class: 'btn btn-primary' %>
+              </div>
             <% end %>
           <% end %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
         </div>
     </div>
   </div>
@@ -106,15 +115,57 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="usersModalLabel">Редактирование комнаты</h5>
+        <h5 class="modal-title" id="usersModalLabel">Пользователи комнаты</h5>
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"></span>
         </button>
       </div>
         <div class="modal-body">
-          <% @room.users.each do |u| %>
-            <%= u.nickname %>
-          <% end %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Имя</th>
+              <th scope="col">Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @room.users.each do |u| %>
+              <tr>
+                <td>
+                  <%= link_to u.nickname, user_path(u.id) %>
+                </td>
+                <td>
+                  <% if u.online %>
+                    Онлайн
+                  <% else %>
+                    Оффлайн
+                  <% end %>
+                </td>
+                <% if @room.user_id == current_user.id && current_user.nickname != u.nickname %>
+                  <td class='text-center'>
+                    <% if check_ban(@room.id, u.id) %>
+                      <%= link_to 'Разблокировать', '#', class: 'dropdown-item text-danger', id: 'user_ban', token: @room.token, target: false, user_id: u.id  %>
+                    <% else %>
+                      <%= link_to 'Заблокировать', '#', class: 'dropdown-item text-danger', id: 'user_ban', token: @room.token, target: true, user_id: u.id  %>
+                    <% end %>
+                  </td>
+                <% elsif @room.user_id != current_user.id && current_user.nickname == u.nickname %>
+                  <td class='text-center'>
+                    <% if check_ban(@room.id, u.id) %>
+                      <i class='bi bi-lock text-danger'></i>
+                    <% else %>
+                      <i class='bi bi-unlock text-danger  '></i>
+                    <% end %>
+                  </td>
+                <% else @room.user_id == current_user.id %>
+                 <td class='text-center'>
+                    Владелец
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>

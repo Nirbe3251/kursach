@@ -12,7 +12,7 @@ ru:
     online_now: Сейчас онлайн
 
   layouts:
-    welcome: Добро пожаловать в Instatalk,
+    welcome: Добро пожаловать,
 
   messages:
     enter_message: Введите сообщение

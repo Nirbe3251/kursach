@@ -67,7 +67,7 @@ export function Check() {
                             beforeSend: function(req) {
                                 req.setRequestHeader("Accept", 'application/json')
                             },
-                            data: {password: password},
+                            data: {password: password, user_id: $('body').attr('data-user')},
                             success: function(res) {
                                 console.log('success')
                                 console.log(res)

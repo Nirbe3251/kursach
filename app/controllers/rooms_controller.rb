@@ -66,6 +66,8 @@ class RoomsController < ApplicationController
     respond_to do |format|
       format.json { 
         if @room.password == params[:password]
+          user = User.find(params[:user_id])
+          @room.users << user unless @room.users.include? user
           logger.info("Password true")
           # logger.info(render json: {password: false})
           render plain: true
