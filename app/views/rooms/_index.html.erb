@@ -42,7 +42,6 @@
                       status: room.status, token: room.token,
                       include: room.user_include?(current_user), banned: check_ban(room.id, current_user.id)
                     } %>
-                    </div>
                   </td>
                   <td>
                     <% case room.status %>
@@ -52,7 +51,7 @@
                       Публичная <i class='bi bi-unlock'></i>
                     <% end %>
                   </td>
-                  <td><%= room.users.count %></td>
+                  <td><%= room.users.where(online: true).count %>/<%= room.users.count %></td>
                 </tr>
               <% end %>
             </tbody>
