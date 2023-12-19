@@ -28,6 +28,10 @@ export function Check() {
         var token = $(this).attr('data-token');
         var url = `/rooms/${token}` 
         var check_url = `/rooms/${token}/check_password`;
+        var banned = $(this).attr('data-banned');
+        if (banned == 'true'){
+            $(this).attr('data-bs-target', '#ban-modal')
+        } else {            
         if ($(this).attr('data-include') == 'true') {
             console.log('ok')
             $(this).removeAttr('data-bs-toggle')
@@ -86,6 +90,6 @@ export function Check() {
                     })
                 };
             })
-        }
+        }}
     })
 };

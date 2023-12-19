@@ -11,7 +11,7 @@
           </div>
           <%= form_tag root_path, method: :get, class: 'row d-flex justify-content-start align-items-start pb-4' do %>
             <div class='col-auto'>
-              <%= label_tag 'search[name]','Имя' %>
+              <%= label_tag 'search[name]','Название' %>
               <%= text_field_tag 'search[name]', params[:search] ? params[:search][:name] : '', class: 'form-control' %>
             </div>
             <div class='col-auto'>
@@ -37,10 +37,10 @@
                 <tr>
                   <td><%= room.id %></td>
                   <td class='check-td'>
-                    <%= link_to room.name, nil, class: "check-password", data: { 
+                    <%= link_to room.name, nil, class: "check-password check-ban", data: { 
                       bs_target: '#checkPasswordModal', bs_toggle: 'modal', 
                       status: room.status, token: room.token,
-                      include: room.user_include?(current_user)
+                      include: room.user_include?(current_user), banned: check_ban(room.id, current_user.id)
                     } %>
                     </div>
                   </td>
@@ -61,6 +61,7 @@
       </div>
       <%= render 'modals/create_room', rooms: @room %>
       <%= render 'modals/check_room' %>
+      <%= render 'modals/ban_room' %>
     </div>
   </div>
 </div>
