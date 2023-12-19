@@ -4,61 +4,65 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-              <% if @user.avatar.attached? %>
-                <%= image_tag @user.avatar, class: 'avatar', alt: 'avatar' %>
-              <% end %>
-            <h5 class="my-3"><%= @user.nickname %></h5>
-            <div class="d-flex justify-content-center mb-2">
-              <% if current_user.id == @user.id %>
-                <%= link_to 'Редактировать', edit_user_registration_path, class: 'btn btn-primary' %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-8">
-        <div class="card mb-4">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Никнейм</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0"><%= @user.nickname %></p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Почта</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0"><%= @user.email %></p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Дата рождения</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0"><%= @user.birthday %></p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Статус</p>
-              </div>
-              <div class="col-sm-9">
-                <% if @user.online %>
-                  <p class="text-muted mb-0">Онлайн</p>
-                <% else %>
-                  <p class="text-muted mb-0">Оффлайн</p>
+          <% if @user.nickname == 'deleted' %>
+            <h5 class="my-3">Этот аккаунт был удален</h5>
+            <% else %>
+                <% if @user.avatar.attached? %>
+                  <%= image_tag @user.avatar, class: 'avatar', alt: 'avatar' %>
+                <% end %>
+              <h5 class="my-3"><%= @user.nickname %></h5>
+              <div class="d-flex justify-content-center mb-2">
+                <% if current_user.id == @user.id %>
+                  <%= link_to 'Редактировать', edit_user_registration_path, class: 'btn btn-primary' %>
                 <% end %>
               </div>
             </div>
-            <hr>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Никнейм</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"><%= @user.nickname %></p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Почта</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"><%= @user.email %></p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Дата рождения</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"><%= @user.birthday %></p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Статус</p>
+                </div>
+                <div class="col-sm-9">
+                  <% if @user.online %>
+                    <p class="text-muted mb-0">Онлайн</p>
+                  <% else %>
+                    <p class="text-muted mb-0">Оффлайн</p>
+                  <% end %>
+                </div>
+              </div>
+              <hr>
+            <% end %>
           </div>
         </div>
       </div>

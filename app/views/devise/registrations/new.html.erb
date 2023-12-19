@@ -8,29 +8,29 @@
               <div class="mb-md-5 mt-md-4 pb-5">
                 <h2 class="fw-bold mb-2 text-uppercase">Sign up</h2>
                 <div class="form-outline form-white mb-4">
-                  <%= f.email_field :email, "Почта", autofocus: true, autocomplete: "email", class: 'form-control form-control-lg' %>
-                  <%= f.label :email, class: 'form-label' %>
+                  <%= f.email_field :email, autofocus: true, class: 'form-control form-control-lg' %>
+                  <%= f.label :email, "Почта",class: 'form-label' %>
                 </div>
                 <div class="form-outline form-white mb-4">
-                  <%= f.text_field :nickname, "Никнейм",autofocus: true, class: 'form-control form-control-lg' %>
-                  <%= f.label :nickname, class: 'form-label' %>
+                  <%= f.text_field :nickname, class: 'form-control form-control-lg' %>
+                  <%= f.label :nickname, "Никнейм", class: 'form-label' %>
                 </div>
                 <div class="form-outline form-white mb-4">
-                  <%= f.date_field :birthday, "Дата рождения",autofocus: true, class: 'form-control form-control-lg' %>
-                  <%= f.label :birthday, class: 'form-label' %>
+                  <%= f.date_field :birthday, autofocus: true, class: 'form-control form-control-lg' %>
+                  <%= f.label :birthday, "Дата рождения", class: 'form-label' %>
                 </div>
 
                 <div class="form-outline form-white mb-4">
-                  <%= f.password_field :password, "Пароль",autocomplete: "new-password", class: 'form-control form-control-lg' %>
-                  <%= f.label :password, class: 'form-label' %>
+                  <%= f.password_field :password, autocomplete: "new-password", class: 'form-control form-control-lg' %>
+                  <%= f.label :password, "Пароль", class: 'form-label' %>
                   <% if @minimum_password_length %>
                   <em>(<%= @minimum_password_length %> characters minimum)</em>
                   <% end %><br />
                 </div>
 
                 <div class="field">
-                  <%= f.password_field :password_confirmation, "Подтверждение пароля",autocomplete: "new-password", class: 'form-control form-control-lg' %>
-                  <%= f.label :password_confirmation, class: 'form-label' %>
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control form-control-lg' %>
+                  <%= f.label :password_confirmation, "Подтверждение пароля", class: 'form-label' %>
                 </div>
 
                 <div class="actions">

@@ -20,15 +20,15 @@
                 </div>
                 <div class="form-outline form-white mb-4">
                   <%= f.label :email, "Почта" %><br />
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control form-control-lg' %>
+                  <%= f.email_field :email, autocomplete: "email", class: 'form-control form-control-lg' %>
                 </div>
                 <div class="form-outline form-white mb-4">
                   <%= f.label :nickname, "Никнейм" %><br />
-                  <%= f.text_field :nickname, autofocus: true, class: 'form-control form-control-lg' %>
+                  <%= f.text_field :nickname, class: 'form-control form-control-lg' %>
                 </div>
                 <div class="form-outline form-white mb-4">
                   <%= f.label :birthday, "Дата рождения" %><br />
-                  <%= f.date_field :birthday, autofocus: true, class: 'form-control form-control-lg' %>
+                  <%= f.date_field :birthday, class: 'form-control form-control-lg' %>
                 </div>
                 <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                   <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
