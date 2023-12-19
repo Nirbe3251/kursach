@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post '/rooms/:token/edit', to: 'rooms#edit', as: 'edit_room'
   post '/rooms/:token/leave_room', to: 'rooms#leave_room', as: 'leave_room'
 
-  resources :rooms, only: %i[index show create destroy leave_room], param: :token do
+  resources :rooms, only: %i[index show create destroy leave_room edit update], param: :token do
     member do
       get :check_password
       get :user_ban

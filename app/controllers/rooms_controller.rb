@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[show set_room_user check_password user_ban add_user check_banned edit leave_room]
+  before_action :set_room, only: %i[show set_room_user check_password user_ban add_user check_banned edit leave_room update]
   before_action :set_room_user, only: %i[show]
   before_action :check_banned, only: %i[show]
  
@@ -12,15 +12,24 @@ class RoomsController < ApplicationController
   def show
   end
 
-  def edit
-    if params.present?
-      @room.update(name: params[:name]) if params[:name].present?
-      @room.update(password: params[:password]) if params[:password.present?]
-    end
-  end
+  def edit;end
 
   def new
     @room = Room.new
+  end
+  
+  def update
+    if params.present?
+      if params[:name].present?
+        Rails.logger.info('start edit room name')
+        @room.update(name: params[:name])
+      elsif [:password].present?
+        Rails.logger.info('start edit room password')
+        @room.update(password: params[:password])
+        @room.update(status: true) if @room.status == 'pub'
+      end
+      redirect_to room_path(@room.token)
+    end
   end
 
   def create  
@@ -76,11 +85,9 @@ class RoomsController < ApplicationController
           user = User.find(params[:user_id])
           @room.users << user unless @room.users.include? user
           logger.info("Password true")
-          # logger.info(render json: {password: false})
           render plain: true
         else
           logger.info("Password false")
-          # logger.info(render json: {password: false})
           render plain: false
         end 
       }
@@ -98,7 +105,6 @@ class RoomsController < ApplicationController
     respond_to do |format|
       format.json {
         status = RoomUser.ban(@room.id, params[:user_id], params[:target])
-
         render plain: true if status == 'banned'
         render plain: false if status == 'unbanned'
       }
@@ -121,7 +127,6 @@ class RoomsController < ApplicationController
 
   def check_banned
     status = RoomUser.check_user_ban(@room.id, current_user.id)
-    Rails.logger.info("Status Ban:::#{status}")
     if status
       redirect_to root_path
     else
