@@ -12,9 +12,10 @@ export function Check() {
     <form>
         <div class="form-group row">
             <div class='input-group col-12'>
-                <label for='passwd' class='col-sm-2 col-form-label'>Password:</label>
+                <label for='passwd' class='col-sm-2 col-form-label'>Пароль:</label>
                 <div class="col-sm-10">
                     <input type='password' id='passwd' class='form-control' required/>
+                    <div id='error-password-text' class='mt-2 text-danger'></div>
                 </div>
             </div>
         </div>
@@ -80,6 +81,8 @@ export function Check() {
                                     window.location.replace(url)
                                 } else {
                                     console.log('bad password')
+                                    $("#passwd").addClass('border-danger')
+                                    $("#error-password-text").text("Неправильный пароль")
                                 }
                             },
                             error: function(e) {
