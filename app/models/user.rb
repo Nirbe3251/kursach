@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-  has_many :messages, dependent: :destroy
-  has_many :room_users
-  has_many :rooms, through: :room_users, dependent: :destroy
+  has_many :messages
+  has_many :room_users, dependent: :destroy
+  has_many :rooms, through: :room_users
   has_one_attached :avatar
   # before_create :generate_nickname
   scope :online, -> { where(online: true) }
@@ -11,8 +11,20 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   private
-       
-  # def generate_nickname
-  #   self.nickname = Faker::Name.first_name.downcase
-  # end
+
+  before_destroy do
+    check_rooms
+  end
+
+  def check_rooms
+    rooms = Room.includes(:users).where(user_id: id)
+    rooms.each do |r|
+      users = r.users
+      if users.present?
+        r.update(user_id: users.min.id)
+      else
+        r.destroy
+      end
+    end
+  end
 end
