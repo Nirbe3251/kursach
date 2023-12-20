@@ -21,6 +21,7 @@
                 <div class="form-outline form-white mb-4">
                   <%= f.label :email, "Почта" %><br />
                   <%= f.email_field :email, autocomplete: "email", class: 'form-control form-control-lg' %>
+                  <%= render "devise/shared/error_messages", resource: resource, type: 'email' %>
                 </div>
                 <div class="form-outline form-white mb-4">
                   <%= f.label :nickname, "Никнейм" %><br />
@@ -36,6 +37,7 @@
                 <div class="form-outline form-white mb-4">
                   <%= f.label :password, "Пароль" %> <i>(Оставить пустым, чтобы не изменять)</i><br />
                   <%= f.password_field :password, autocomplete: "new-password", class: 'form-control form-control-lg' %>
+                  <%= render "devise/shared/error_messages", resource: resource, type: 'password' %>
                   <% if @minimum_password_length %>
                     <em><%= @minimum_password_length %> символов минимум</em>
                   <% end %>
@@ -43,7 +45,9 @@
                 <div class="form-outline form-white mb-4">
                   <%= f.label :password_confirmation, "Подтверждение пароля" %><br />
                   <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control form-control-lg' %>
+                  <%= render "devise/shared/error_messages", resource: resource, type: 'conf-passwd' %>
                 </div>
+
                 <div class="form-outline form-white mb-4">
                   <%= f.label :current_password, "Текущий пароль" %> <i>(Необходим для подтверждения изменений)</i><br />
                   <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control form-control-lg' %>
