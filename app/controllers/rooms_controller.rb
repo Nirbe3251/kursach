@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[show set_room_user check_password user_ban add_user check_banned edit leave_room update]
+  before_action :set_room, only: %i[show set_room_user check_password user_ban add_user check_banned edit leave_room update check_ban]
   before_action :set_room_user, only: %i[show]
   before_action :check_banned, only: %i[show]
   after_action :check_banned, only: %i[show]
@@ -104,7 +104,6 @@ class RoomsController < ApplicationController
 
   def user_ban
     user = User.find(params[:user_id])
-    show_name = user.nickname.present? ? user.nickname : user.email
     response.header["Content-Type"] = 'application/json'
     respond_to do |format|
       format.json {
@@ -117,10 +116,17 @@ class RoomsController < ApplicationController
         render plain: false if status == 'unbanned'
       }
     end
-    # message = "Пользователь #{show_name} был заблокирован"
-    # message = 'Вы были заблокированы' if current_user == user
-    # ActionCable.server.broadcast("room_channel_#{@room.id}", { message: })
-    # check_banned(user.id)
+  end
+
+  def check_ban
+    response.header["Content-Type"] = 'application/json'
+    status = RoomUser.check_user_ban(@room.id, params[:user_id])
+    respond_to do |format|
+      format.json {
+        Rails.logger.info("STATUS CHECK BAN:::#{status}")
+        render plain: status
+      }
+    end
   end
 
   private

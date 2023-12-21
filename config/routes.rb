@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     member do
       get :check_password
       get :user_ban
+      get :check_ban
       get :add_user
     end
   end

@@ -16,7 +16,6 @@ class UsersOnlineChannel < ApplicationCable::Channel
   end
 
   def ban
-    RoomUser.check_user_ban(data[:room], current_user.id)
   end
 
   private
