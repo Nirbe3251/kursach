@@ -37,7 +37,7 @@
             <% @room.messages.each do |message| %>
               <div class="d-flex justify-content-between">
                 <div>
-                  <%= link_to message.user.nickname, user_path(message.user.id), class: 'd-inline-block' %>
+                  <%= link_to message.user.nickname.present? ? message.user.nickname : message.user.email, user_path(message.user.id), class: 'd-inline-block' %>
                   <%# if current_user.id == message.room.user_id %>
                   <%# <div class="btn-group"> %>
                     <%# <button class="btn dropdown-toggle d-inline-block" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> %>
