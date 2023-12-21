@@ -43,7 +43,7 @@ export function UserOnlineSubscriptions() {
         window.location.replace('/')
 
       } else if (user['banned'] == false) {
-        window.location.replace('/')
+        window.location.reload()
       }
     }
   })
