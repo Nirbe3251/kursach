@@ -1,10 +1,21 @@
-<div class="mt-2">
-  <%= form_tag @room, url: room_path, method: :post do |f| %>
+<% if !banned %>
+  <div class="mt-2">
+    <%= form_tag @room, url: room_path, method: :post do |f| %>
+      <div class="form-group">
+        <div class="input-group">
+          <%= text_field_tag :message_body, '', class: 'form-control',
+            placeholder: t('messages.enter_message') %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="mt-2">
     <div class="form-group">
-      <div class="input-group">
-        <%= text_field_tag :message_body, '', class: 'form-control',
-          placeholder: t('messages.enter_message') %>
+      <div class="input-group text-center">
+        Вы были заблокированы
       </div>
     </div>
-  <% end %>
-</div>
+  </div>
+
+<% end %>

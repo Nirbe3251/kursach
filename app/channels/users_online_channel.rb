@@ -12,6 +12,13 @@ class UsersOnlineChannel < ApplicationCable::Channel
     # stop_stream_for current_user
   end
 
+  def receive(data)
+  end
+
+  def ban
+    RoomUser.check_user_ban(data[:room], current_user.id)
+  end
+
   private
 
   def handle_offline

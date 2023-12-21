@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
   before_action :set_room, only: %i[show set_room_user check_password user_ban add_user check_banned edit leave_room update]
   before_action :set_room_user, only: %i[show]
   before_action :check_banned, only: %i[show]
+  after_action :check_banned, only: %i[show]
  
   def index
     @rooms = Room.search(params[:search])
@@ -10,6 +11,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    # Rails.logger.first
   end
 
   def edit;end
@@ -101,14 +103,24 @@ class RoomsController < ApplicationController
   end
 
   def user_ban
+    user = User.find(params[:user_id])
+    show_name = user.nickname.present? ? user.nickname : user.email
     response.header["Content-Type"] = 'application/json'
     respond_to do |format|
       format.json {
         status = RoomUser.ban(@room.id, params[:user_id], params[:target])
-        render plain: true if status == 'banned'
+        if status == 'banned'
+          UsersOnlineChannel.broadcast_to user, room: @room.token, banned: true, user: user.id
+          render plain: true
+        end
+        UsersOnlineChannel.broadcast_to user, room: @room.token, banned: false, user: user.id
         render plain: false if status == 'unbanned'
       }
     end
+    # message = "Пользователь #{show_name} был заблокирован"
+    # message = 'Вы были заблокированы' if current_user == user
+    # ActionCable.server.broadcast("room_channel_#{@room.id}", { message: })
+    # check_banned(user.id)
   end
 
   private
@@ -125,8 +137,8 @@ class RoomsController < ApplicationController
     @room_user = RoomUser.where(room_id: @room.id)
   end
 
-  def check_banned
-    status = RoomUser.check_user_ban(@room.id, current_user.id)
+  def check_banned(u_id = current_user.id)
+    status = RoomUser.check_user_ban(@room.id, u_id)
     if status
       redirect_to root_path
     else
