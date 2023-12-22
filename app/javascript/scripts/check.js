@@ -44,26 +44,30 @@ export function Check() {
                 console.log('not_ok')
                 if (status == 'pub') {
                     modal_body.html(public_text)
-                    confirm.on('click', function(){
-                        $.ajax({
-                            url: `/rooms/${token}/add_user`,
-                            method: 'GET',
-                            data: {user_id: $('body').attr('data-user')},
-                            beforeSend: function(req) {
-                                req.setRequestHeader("Accept", 'application/json')
-                            },
-                            success: function(data) {
-                                console.log(data)
-                                window.location.replace(url)
-                            },
-                            error: function(e) {
-                                console.log(e)
-                            }
-                        })
+                    confirm.on('click keypress', function(e) {
+                        var key = e.which || e.keyCode;
+                        if (key === 13) {
+                            $.ajax({
+                                url: `/rooms/${token}/add_user`,
+                                method: 'GET',
+                                data: {user_id: $('body').attr('data-user')},
+                                beforeSend: function(req) {
+                                    req.setRequestHeader("Accept", 'application/json')
+                                },
+                                success: function(data) {
+                                    console.log(data)
+                                    window.location.replace(url)
+                                },
+                                error: function(e) {
+                                    console.log(e)
+                                }
+                            })
+                        }
                     })
                 } else {
                     modal_body.html(password_form)
-                    confirm.on('click', function() {
+                    confirm.on('click', function(e) {
+                        var key = e.which || e.keyCode;
                         let password = $('#passwd').val();
                         console.log(`Password:::: ${password}`);
                         $.ajax({
@@ -90,6 +94,7 @@ export function Check() {
                                 console.log(e.responseText)
                             }
                         })
+
                     })
                 };
             })
